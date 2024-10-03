@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, Suspense, lazy } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUser, updateUser } from "../redux/userSlice";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
+
+// Lazy load the image component
+const LazyImage = lazy(() => import("./LazyImage"));
 
 const UserList = () => {
   const users = useSelector((state) => state.users.users); // Get the list of users from Redux state
@@ -51,6 +54,12 @@ const UserList = () => {
       <ul>
         {users.map((user) => (
           <li key={user.id} className="user-item">
+            <div className="user-profile">
+              {/* Lazy load the profile image */}
+              <Suspense fallback={<div>Loading...</div>}>
+                <LazyImage />
+              </Suspense>
+            </div>
             {editUserId === user.id ? (
               // If the current user is being edited, show input fields for editing
               <div className="user-info">
