@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Provider } from "react-redux";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { store } from "./redux/store";
+import ApiList from "./components/ApiList";
+import UserList from "./components/UserList";
+import MultiStepForm from "./components/MultiStepForm";
+import LazyComponent from "./components/LazyComponent";
+import "./App.css";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Router>
+        <nav>
+          <Link to="/">Home</Link> | <Link to="/users">Users</Link> |{" "}
+          <Link to="/form">Multi-step Form</Link> |{" "}
+          <Link to="/lazy">Lazy Load</Link>
+        </nav>
+        <Routes>
+          <Route path="/" element={<ApiList />} />
+          <Route path="/users" element={<UserList />} />
+          <Route path="/form" element={<MultiStepForm />} />
+          <Route path="/lazy" element={<LazyComponent />} />
+        </Routes>
+      </Router>
+    </Provider>
   );
-}
+};
 
 export default App;
