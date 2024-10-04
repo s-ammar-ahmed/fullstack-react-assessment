@@ -54,3 +54,5 @@ The app uses React Router for navigation with the following routes:
 - `/lazy`: Demonstrates lazy loading of components.
 
 ## Conclusion
+
+This app showcases essential features like user management, multi-step forms, lazy loading, and API interaction. It is a good starting point for understanding state management using Redux in React.
